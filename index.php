@@ -22,7 +22,7 @@
 			var clientId = '[change me]';
 			var clientSecret = '[change me]';
 			var token = '[change me]';
-			var githubUsername = 'u01jmg3';
+			var githubUsername = '[change me]';
 			var notifyOnDesktop = 0; //change to 1 to enable
 			//---------------------------------------------
 
