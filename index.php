@@ -91,8 +91,12 @@
 			}
 
 			function formatIntoVersion(string, doPad){
-				if(doPad)
+				if(doPad){
+					if(string == 'v2010.07.06dev') //old tag exclusion for Modernizr
+						return 0;
+
 					return pad(string.replace(/(m|rc|a|b){1,1}/g, '.').replace(/[^\d|\.]/g, '').replace(/\.+$/, ''), 5);
+				}
 
 				return string.replace(/[^\d|\.|b|m]/g, '').replace(/\.+$/, '');
 			}
@@ -169,6 +173,18 @@
 
 				$('img.loader').center('.vcenter');
 				$.removeCookie('PHPSESSID', { path: '/' });
+
+				$(document).ajaxStop(function(){
+					$('td').on('dblclick', function(event){
+						$(this).find('.checkbox').prop('checked', true);
+
+						$('.checkbox:checked').each(function(){
+							$.removeCookie(($(this).prev('a').text()), { path: '/' });
+						});
+
+						window.location.href = window.location.href; //refresh
+					});
+				});
 			});
 
 			//---------------------------------------------
@@ -277,16 +293,6 @@
 
 												$.cookie('SAVED_REPOS', seenRepos.join('|'), { expires: 365, path: '/' });
 											}
-
-											$('td').on('dblclick', function(event){
-												$(this).find('.checkbox').prop('checked', true);
-
-												$('.checkbox:checked').each(function(){
-													$.removeCookie(($(this).prev('a').text()), { path: '/' });
-												});
-
-												window.location.href = window.location.href; //refresh
-											});
 
 											if(savedRepos.length > 0 && (numberOfCookies - 1) > numberOfRepos)
 												console.log('Redundant cookie(s) found (' + (numberOfCookies - 1) + ' vs. ' + numberOfRepos + ')');
