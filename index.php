@@ -307,6 +307,6 @@
 		<table class="format hidden">
 			<tbody></tbody>
 		</table>
-		<img class="loader vcenter pulsating" width="128" height="128" src="github-logo.png" alt="" title="" />
+		<img class="loader vcenter pulsating" width="128" height="128" src="images/github-logo.png" alt="" title="" />
 	</body>
 </html>
