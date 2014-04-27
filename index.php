@@ -14,7 +14,7 @@
 		<script type="text/javascript" charset="utf-8" src="scripts/jquery-1.11.0.js"></script>
 		<script type="text/javascript" charset="utf-8" src="scripts/custom.js"></script>
 		<script type="text/javascript" charset="utf-8" src="scripts/php.js"></script>
-		<script type="text/javascript" charset="utf-8" src="scripts/jquery.cookie-1.4.0.js"></script>
+		<script type="text/javascript" charset="utf-8" src="scripts/jquery.enhancedCookie-1.0.0.js"></script>
 		<script type="text/javascript">
 			//---------------------------------------------
 			// Customise here
@@ -172,14 +172,14 @@
 				}
 
 				$('img.loader').center('.vcenter');
-				$.removeCookie('PHPSESSID', { path: '/' });
+				$.cookie('PHPSESSID', null); //remove cookie
 
 				$(document).ajaxStop(function(){
 					$('td').on('dblclick', function(event){
 						$(this).find('.checkbox').prop('checked', true);
 
 						$('.checkbox:checked').each(function(){
-							$.removeCookie(($(this).prev('a').text()), { path: '/' });
+							$.cookie(($(this).prev('a').text()), null); //remove cookie
 						});
 
 						window.location.href = window.location.href; //refresh
@@ -197,7 +197,7 @@
 						if(data1[0] !== undefined){
 							data1 = $(data1).sort(sortByName);
 
-							var savedRepos = $.cookie('SAVED_REPOS') !== undefined ? $.cookie('SAVED_REPOS').split('|') : [];
+							var savedRepos = $.cookie('SAVED_REPOS') != null ? $.cookie('SAVED_REPOS').split('|') : [];
 							document.title = originalTitle + ' (' + numberOfRepos + ')';
 
 							$.each(data1, function(i, item){
@@ -209,7 +209,7 @@
 										version = formatIntoVersion(version[0].name, false);
 										var repoName = value.replace(/.*\//, '');
 
-										if($.cookie(repoName) === undefined)
+										if($.cookie(repoName) == null)
 											$.cookie(repoName, version, { expires: 365, path: '/' });
 										else if($.cookie(repoName) != version){
 											$.ajax({
@@ -245,7 +245,7 @@
 												var timestamp = data3[0].commit.author.date;
 												var repoName = value.replace(/.*\//, '');
 
-												if($.cookie(repoName) === undefined)
+												if($.cookie(repoName) == null)
 													$.cookie(repoName, timestamp, { expires: 365, path: '/' });
 												else if($.cookie(repoName) != timestamp){
 													$.ajax({
@@ -282,7 +282,7 @@
 									if(i == (data1.length - 1)){
 										delay(function(){
 											if(getParameterByName('reset', window.location.search))
-												$.removeCookie('SAVED_REPOS', { path: '/' });
+												$.cookie('SAVED_REPOS', null); //remove cookie
 
 											if((!foundUpdate) || (getParameterByName('scheduler', window.location.search) && !foundUnseenUpdate)){
 												window.open('', '_self', '');
