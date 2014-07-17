@@ -20,3 +20,7 @@ GitHub Notifier
 * Some repositories do not use tags so the script will then revert to using the timestamp of the latest commit.
 * Double clicking on a row in the table for a repository will track the latest version of the repository and remove the entry from the table - do this when you have updated to the latest version of a repository and want to track this new version.
 	* To do the above for multiple repositories first check the checkboxes of the repositories you would like to remove and then double click on the row for any of the rows that you have checked - this will remove the repository for the selected row and those which have their checkbox checked.
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT) © [Jonathan Goode](http://jonathangoode.co.uk)
